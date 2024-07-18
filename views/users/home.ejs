@@ -3562,10 +3562,10 @@
                     </div>
                     <div class="col-lg-5">
                         <!-- Subscribe Form -->
-                        <form class="form-subcriber d-flex wow fadeIn animated">
+                        <!-- <form class="form-subcriber d-flex wow fadeIn animated">
                             <input type="email" class="form-control bg-white font-small" placeholder="Enter your email">
                             <button class="btn bg-dark text-white" type="submit">Subscribe</button>
-                        </form>
+                        </form> -->
                         <!-- End Subscribe Form -->
                     </div>
                 </div>
@@ -3701,28 +3701,29 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
-        function submitForm(){
-            const form = document.getElementById('sortForm')
-            const sort = document.getElementById('sortOptions').value;
-            const filterValue = '<%= filter %>';
-            const searchValue = '<%= search %>';
+        // function submitForm(){
+        //     const form = document.getElementById('sortForm')
+        //     const sort = document.getElementById('sortOptions').value;
+        //     const filterValue = '<%= filter %>';
+        //     const searchValue = '<%= search %>';
 
 
-            let selectedSortOption = localStorage.getItem('selectedSort');
-            console.log(`/home?sort=${sort}&filter=<%=filter%>&search=<%=search%>`,"============");
+        //     let selectedSortOption = localStorage.getItem('selectedSort');
+        //     console.log(`/home?sort=${sort}&filter=<%=filter%>&search=<%=search%>`,"============");
 
-           form.action = `/home?sort=${sort}&filter=${filterValue}&search=${searchValue}`;
+        //    form.action = `/home?sort=${sort}&filter=${filterValue}&search=${searchValue}`;
          
             
             
 
 
-        }
+        // }
 
         function submit(){
             const form = document.getElementById('sortForm')
             form.submit();
         }
+        
 
 
 //         function submitForm() {
