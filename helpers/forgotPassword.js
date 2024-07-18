@@ -16,10 +16,10 @@ const sendresetPasswordMail=(username,email,token)=>{
             from:process.env.GMAIL_ADDRESS,
             to:email,
             subject:'reset password',
-            html:'<p> Hai '+username+'Please Click the  link <a href="http://localhost:3000/resetPassword?token='+token+'">and reset your password</a></p>'
+            html:'<p> Hai '+username+'Please Click the  link <a href="https://calosonline.shop/resetPassword?token='+token+'">and reset your password</a></p>'
         
         }
-        console.log(`http://localhost:3000/resetPassword?token=${token}`);
+        console.log(`https://calosonline.shop/resetPassword?token=${token}`);
 
         await transporter.sendMail(mailOPtion,(err,info)=>{
             if(err)

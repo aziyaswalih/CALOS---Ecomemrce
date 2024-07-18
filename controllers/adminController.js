@@ -920,7 +920,7 @@ const deleteimage=async (req,res)=>{
   
       // 3. Update the product in the database
       await Product.findByIdAndUpdate(id, { images: product.images });
-      const url=`http://localhost:3000/admin/editProduct?id=${id}`
+      const url=`https://calosonline.shop/admin/editProduct?id=${id}`
     //   res.redirect(url);
       res.status(200).json({success:true})
     } catch (error) {
