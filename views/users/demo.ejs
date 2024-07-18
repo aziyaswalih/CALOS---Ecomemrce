@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Evara - eCommerce HTML Template</title>
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:title" content="">
+    <meta property="og:type" content="">
+    <meta property="og:url" content="">
+    <meta property="og:image" content="">
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="/users/assets/imgs/theme/favicon.svg">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+    <!-- Template CSS -->
+    <link rel="stylesheet" href="/users/assets/css/main.css?v=3.4">
+    <style>
+     .address-form {
+    max-width: 400px;
+    margin: 20px auto; /* Added margin to the top and bottom */
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="email"],
+textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+    </style>
+
+    </head>
+    <body>
+
+
+     
+        <div class="address-form">
+            <h2>Edit Address</h2>
+            <form method="post" name="addressForm" onsubmit="return validateAddress()">
+                <div class="form-group">
+                    <label for="full_name">Full Name:</label>
+                    <input id="name" class="form-control"  value="<%=userAddress.name%>" name="full_name" type="text">
+                    <div id="name-error" class="text-danger"></div>
+                </div>
+                <div class="form-group">
+                    <label for="country">Country:</label>
+                    <input class="form-control" id="country" value="<%= userAddress.country %>" name="country" type="text">
+                    <div id="country-error" class="text-danger"></div>
+
+                </div>
+                <div class="form-group">
+                    <label for="state">State:</label>
+                    <input class="form-control" id="state" name="state" value="<%= userAddress.state %>" type="text">
+                    <div id="state-error" class="text-danger"></div>
+                </div>
+                <div class="form-group">
+                    <label for="city">City:</label>
+                    <input class="form-control" value="<%= userAddress.city %>" id="city" name="city" type="text">
+                    <div id="city-error" class="text-danger"></div>
+
+                </div>
+                <div class="form-group">
+                    <label for="city">Street:</label>
+                    <input class="form-control" value="<%=  userAddress.street %>" id="street" name="street" type="text">
+                    <div id="street-error" class="text-danger"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="pincode">Pincode:</label>
+                    <input class="form-control" id="pincode" value="<%= userAddress.pincode %>" name="pincode" type="number">
+                    <div id="pincode-error" class="text-danger"></div>
+                </div>
+                <div class="form-group">
+                    <label for="mobile">Mobile:</label>
+                    <input class="form-control" id="mobile" value="<%= userAddress.mobile %>" name="mobile" type="number">
+                    <div id="mobile-error" class="text-danger"></div>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <p class="mb-50 font-sm">
+                    <% if(typeof msg != "undefined"){ %>
+                        <p class="text-danger"><%= msg %></p>
+                    <% } %>
+                </p>
+            </form>
+        </div>
+
+        
+
+
+
+
+        <script>
+
+            const name=document.getElementById('name').addEventListener('input',validateAddress)
+            const country=document.getElementById('country').addEventListener('input',validateAddress)
+            const street=document.getElementById('street').addEventListener('input',validateAddress)
+            const city=document.getElementById('city').addEventListener('input',validateAddress)
+            const pincode=document.getElementById('pincode').addEventListener('input',validateAddress)
+            const state=document.getElementById('state').addEventListener('input',validateAddress)
+            const mobile=document.getElementById('mobile').addEventListener('input',validateAddress)
+
+        function validateAddress()
+        {
+            const name=document.getElementById('name').value
+            const country=document.getElementById('country').value
+            const street=document.getElementById('street').value
+            const city=document.getElementById('city').value
+            const pincode=document.getElementById('pincode').value
+            const state=document.getElementById('state').value
+
+            const mobile=document.getElementById('mobile').value
+            var isValid=true
+
+            if(name ==="" )
+            {
+                document.getElementById('name-error').innerHTML="enter the name"
+                isValid=false
+            }else{
+                document.getElementById("name-error").innerHTML=""
+
+            }
+            if(country==="")
+            {
+                document.getElementById('country-error').innerHTML="enter the country"
+                isValid=false
+            }
+            else
+            {
+                document.getElementById("country-error").innerHTML=""
+            }
+            if(street==="")
+            {
+                document.getElementById("street-error").innerHTML="enter the Street"
+                isValid=false
+            }
+            else
+            {
+                document.getElementById('street-error').innerHTML=""
+            }
+            if(city==="")
+            {
+                document.getElementById('city-error').innerHTML="enter the city"
+                isValid=false
+            }
+            else
+            {
+                document.getElementById('city-error').innerHTML=""
+            }
+            if(pincode==="")
+            {
+                document.getElementById('pincode-error').innerHTML="enter pincode"
+                isValid=false
+            }
+            else
+            {
+                document.getElementById('pincode-error').innerHTML=""
+            }
+            if(mobile==="")
+            {
+                document.getElementById('mobile-error').innerHTML="enter the mobile number"
+                isValid=false
+            }
+            else if(mobile.length>10 || mobile.length < 10)
+            {
+                document.getElementById('mobile-error').innerHTML="enter the valid mobile number"
+                isValid=false
+            }
+            else
+            {
+                document.getElementById('mobile-error').innerHTML=""
+            }
+            if(state=="")
+            {
+                document.getElementById('state-error').innerHTML="enter the state"
+                isValid=false
+            }
+            else
+            {
+                document.getElementById('state-error').innerHTML=""
+            }
+
+            return isValid
+
+        }
+    </script>
+    
+
+
+
+    <script src="/users/assets/js/vendor/modernizr-3.6.0.min.js"></script>
+    <script src="/users/assets/js/vendor/jquery-3.6.0.min.js"></script>
+    <script src="/users/assets/js/vendor/jquery-migrate-3.3.0.min.js"></script>
+    <script src="/users/assets/js/vendor/bootstrap.bundle.min.js"></script>
+    <script src="/users/assets/js/plugins/slick.js"></script>
+    <script src="/users/assets/js/plugins/jquery.syotimer.min.js"></script>
+    <script src="/users/assets/js/plugins/wow.js"></script>
+    <script src="/users/assets/js/plugins/jquery-ui.js"></script>
+    <script src="/users/assets/js/plugins/perfect-scrollbar.js"></script>
+    <script src="/users/assets/js/plugins/magnific-popup.js"></script>
+    <script src="/users/assets/js/plugins/select2.min.js"></script>
+    <script src="/users/assets/js/plugins/waypoints.js"></script>
+    <script src="/users/assets/js/plugins/counterup.js"></script>
+    <script src="/users/assets/js/plugins/jquery.countdown.min.js"></script>
+    <script src="/users/assets/js/plugins/images-loaded.js"></script>
+    <script src="/users/assets/js/plugins/isotope.js"></script>
+    <script src="/users/assets/js/plugins/scrollup.js"></script>
+    <script src="/users/assets/js/plugins/jquery.vticker-min.js"></script>
+    <script src="/users/assets/js/plugins/jquery.theia.sticky.js"></script>
+    <!-- Template  JS -->
+    <script src=".//users/assets/js/main.js?v=3.4"></script>
+</body>
+
+</html>
+
+
+
+
+
+const loadAddressEdit=async(req,res)=>{
+    try {
+        const addressId=req.query.id
+      
+        
+        const userAddress=await Address.findOne({
+            userId:req.session.user._id})
+
+            const findAddress = userAddress.address.find(addr => addr._id.toString() === addressId);
+            console.log("Finding address:", findAddress);
+            
+
+        // console.log(userAddress);
+        res.render('users/address_edit',{userAddress:findAddress})
+       
+        
+    } catch (error) {
+        
+        console.log("error from userCOntroller loadAddressEdit",error);
+    }
+}
+
+const editAddress= async(req,res)=>{
+    try {
+        console.log("edt addreds rendered");
+
+        const addressId=req.query.id
+      
+        const fullname=req.body.full_name
+        const country=req.body.country
+        const state=req.body.state
+        const city=req.body.city
+        const pincode=req.body.pincode
+        const mobile=req.body.mobile
+        const street=req.body.street
+
+        const userAddress=await Address.findOne({
+            userId:req.session.user._id})
+
+        const findAddress = userAddress.address.find(addr => addr._id.toString() === addressId);
+        
+
+       if(findAddress )
+       {
+        console.log("finding addresss",findAddress);
+
+        findAddress.name=fullname;
+
+        
+        findAddress.mobile=mobile;
+        findAddress.country=country;
+        findAddress.state=state;
+        findAddress.city=city;
+        findAddress.street=street;
+        findAddress.pincode=pincode
+
+
+        const saved=await userAddress.save()
+        if(saved)
+        res.redirect('/profile#address')
+    
+        else
+        res.render('users/address_edit',{msg:'address not edited'})
+
+       }
+        
+    } catch (error) {
+        
+        console.log("error from usercontroller editAddress",error);
+    }
+}

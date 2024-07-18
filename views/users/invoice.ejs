@@ -1,0 +1,200 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order Details</title>
+  <link rel="stylesheet" href="/path/to/your/styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Order Details</h1>
+    
+    <h2>Order ID: <%= order._id %></h2>
+    <p>Order Date: <%= order.createdAt.toDateString() %></p>
+    <p>User: <%= order.userId.name %> (Email: <%= order.userId.email %>)</p>
+    <p>Shipping Address: <%= order.shippingAddress %></p>
+    <p>Order Status: <%= order.orderStatus %></p>
+    <p>Payment Status: <%= order.paymentStatus %></p>
+
+    <h3>Products:</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Product Name</th>
+          <th>Quantity</th>
+          <th>Price</th>
+          <th>Subtotal</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% order.products.forEach(product => { %>
+          <tr>
+            <td><%= product.productId.name %></td>
+            <td><%= product.quantity %></td>
+            <td>₹<%= product.price %></td>
+            <td>₹<%= product.quantity * product.price %></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+
+    <h3>Total Amount: ₹<%= order.totalAmount %></h3>
+  </div>
+</body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order Details</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <div class="container mt-5">
+    <div class="card">
+
+      <div class="card-header">
+        <div style="align-items: end;">                                   
+          <a class="btn btn-primary pb-15" id="download-btn">
+              <span class="material-symbols-outlined"></span>
+              Download PDF</a>
+      </div>
+      </div>
+      
+</div>
+      <div class="card-body">
+        <h3>Invoice</h3><br>
+
+        <h5 class="card-title">Order ID: <%= order._id %></h5>
+        <p class="card-text">Order Date: <%= order.createdAt.toDateString() %></p>
+        <div class="intro">
+          Hi <strong ><%= order.userId.name %></strong>,
+          <br>
+          This is the receipt for a payment of <strong >₹<%= order.totalAmount %> </strong> (INR) for your order.
+      </div><br>
+        <!-- <p class="card-text">User: <%= order.userId.name %> </p> -->
+        <div class="payment-details">
+          <div class="row">
+              <div class="col-sm-6">
+        <p class="card-text"><strong>Shipping Address:</strong>
+                <span><address>
+                    
+                   <%= address.name %><br>
+                    <%= address.street %><br>
+                    <%= address.city  %>,
+                    <%= address.state %>,
+                    <%= address.country %>
+                    <br><p>Pin: <%= address.pincode %></p>
+
+                <p>Mobile No: <%= address.mobile %></p>
+                <p class="card-text"> Email: <%= order.userId.email %></p>
+
+                </address></span>
+            </p>
+        <p class="card-text">Order Status: <span class="badge badge-info"><%= order.orderStatus %></span></p>
+        <p class="card-text">Payment Status: <span class="badge badge-warning"><%= order. payment_status %></span></p>
+              </div>
+        <div class="col-sm-6 text-end">
+          <br>
+          <span>Payment To,</span><br>
+          <strong>
+              CALOS Pvt.Ltd
+          </strong>
+          <p>
+              26, HAL Old Airport Rd <br>
+              HSR Layout, 560008 <br>
+              Bengaluru <br>
+              Karnataka,India <br>
+              <a href="#">
+                  Calos786@gmail.com
+              </a>
+          </p>
+      </div>
+  </div>
+  </div>
+
+        <h3 class="mt-4">Products:</h3>
+        <div class="table-responsive">
+          <table class="table table-bordered">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">Product Name</th>
+                <th scope="col">Size</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Price</th>
+                <th scope="col">Shipping Charge</th>
+                <th scope="col">Subtotal</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% order.products.forEach(product => { %>
+                <tr>
+                  <td><%= product.productId.name %></td>
+                  <td><%=product.size%></td>
+                  <td><%= product.quantity %></td>
+                  <td>₹<%= product.productId.promoPrice %></td>
+                  <td>₹ 50</td>
+                  <td>₹<%= product.quantity * product.productId.promoPrice + 50%></td>
+                </tr>
+              <% }) %>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 class="mt-4">Total Amount: ₹<%= order.totalAmount %></h3>
+      </div>
+      <div class="card-footer text-right">
+        <a href="/profile#orders" class="btn btn-primary">Back to Orders</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS and dependencies -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="/js/scripts.js"></script>
+  
+   <!-- Include html2canvas library -->
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+   <!-- Include jsPDF library -->
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+  
+
+<script>
+        document.addEventListener("DOMContentLoaded", function () {
+            document.getElementById('download-btn').addEventListener('click', async function () {
+                const { jsPDF } = window.jspdf;
+
+                // Reference to the HTML content to be converted to PDF
+                const invoiceContent = document.querySelector('.card-body');
+
+                // Use html2canvas to capture the content
+                const canvas = await html2canvas(invoiceContent, { scale: 2 });
+
+                // Create a new jsPDF instance
+                const pdf = new jsPDF('p', 'mm', 'a4');
+                const imgData = canvas.toDataURL('image/png');
+                const imgProps = pdf.getImageProperties(imgData);
+                const pdfWidth = pdf.internal.pageSize.getWidth();
+                const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+
+                // Add the captured image to the PDF
+                pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+
+                // Save the generated PDF
+                pdf.save('invoice.pdf');
+            });
+        });
+
+    </script>
+
+  
+</body>
+</html>
+

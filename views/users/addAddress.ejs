@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calos - eCommerce Website</title>
+  <link rel="shortcut icon" type="image/x-icon" href="/user/assets/imgs/theme/favicon.svg">
+    <!-- Template CSS -->
+    <link rel="stylesheet" href="/user/assets/css/main.css?v=3.4">
+  <style>
+    /* Add some basic styling for better presentation */
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem; /* Add some spacing between form elements */
+    }
+    label {
+      display: block; /* Make labels appear on separate lines */
+      margin-bottom: 5px; /* Add some space below labels */
+    }
+    input {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      width: 100%; /* Make inputs fill available space */
+    }
+  </style>
+</head>
+<body>
+    <section class="pt-150 pb-150">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 m-auto">
+                    <div class="row align-items-center justify-content-center">
+    <div class="col-lg-6">
+        <div class="login_wrap widget-taber-content p-30 background-white border-radius-5">
+            <div class="padding_eight_all bg-white">
+                <div class="heading_s1">
+                     <h3 class="mb-30">Enter your shipping address</h3>
+                </div>
+  <form action="/profile/address/add" method="post" onsubmit="return validateForm()">
+    <label for="name">Name:</label>
+    <input name="name" type="text" id="name" required onfocusout="validateUsername()">
+    <div id="username-error" class="text-danger"></div>
+
+    <label for="mobile">Mobile Number:</label> 
+    <input name="mno" type="tel" id="mobile" required onfocusout="validateMobile()"> 
+    <div id="mobile-error" class="text-danger"></div>
+
+    <label for="country">Country:</label>
+    <input name="country" type="text" id="country" required onfocusout="validateCountry()">
+    <div id="country-error" class="text-danger"></div>
+
+    <label for="state">State:</label>
+    <input name="state" type="text" id="state" required onfocusout="validateState()">
+    <div id="state-error" class="text-danger"></div>
+
+    <label for="city">City:</label>
+    <input name="city" type="text" id="city" required onfocusout="validateCity()">
+    <div id="city-error" class="text-danger"></div>
+
+    <label for="street">Street Address:</label> 
+    <input name="street" type="text" id="street" required onfocusout="validateStreet()">
+    <div id="street-error" class="text-danger"></div>
+
+    <label for="pincode">Pincode:</label>
+    <input name="pincode" type="text" id="pincode" required onfocusout="validatePincode()">
+    <div id="pincode-error" class="text-danger"></div>
+
+    <button type="submit" name="submit">Submit Address</button> </form>
+    </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<script>
+
+  function validateUsername(){
+    const username = document.getElementById('name').value
+    const errorDiv = document.getElementById('username-error')
+
+    if(username.length < 3){
+      errorDiv.textContent = 'Username must be atleast 3 characters long.';
+      return false;
+    } else {
+      errorDiv.textContent = '';
+      return true;
+    }
+  } 
+
+
+  function validateMobile() {
+            const mobile = document.getElementById('mobile').value;
+            const errorDiv = document.getElementById('mobile-error');
+            const mobilePattern = /^[0-9]{10}$/;
+            if (!mobilePattern.test(mobile)) {
+                errorDiv.textContent = 'Please enter a valid 10-digit mobile number.';
+                return false;
+            } else {
+                errorDiv.textContent = '';
+                return true;
+            }
+        }
+
+  
+  function validateCountry() {
+            const country = document.getElementById('country').value;
+            const errorDiv = document.getElementById('country-error');
+            if(country.length < 2){
+              errorDiv.textContent = 'Please enter your country name'
+              return false;
+            } else {
+              errorDiv.textContent = '';
+              return true;
+            }
+  }
+
+
+  function validateState() {
+    const state = document.getElementById('state').value
+    const errorDiv = document.getElementById('state-error')
+    if(state.length < 3){
+      errorDiv.textContent = 'Please enter your state name'
+      return false;
+    } else {
+      errorDiv.textContent = '';
+      return true;
+    }
+  }
+
+
+  function validateCity() {
+    const city = document.getElementById('city').value
+    const errorDiv = document.getElementById('city-error')
+    if(city.length < 3){
+      errorDiv.textContent = 'Please enter your city name';
+      return false;
+    } else {
+      errorDiv.textContent = '';
+      return true;
+    }
+  }
+
+
+  function validateStreet() {
+    const street = document.getElementById('street').value
+    const errorDiv = document.getElementById('street-error')
+    if(street.length < 3){
+      errorDiv.textContent = 'Please enter street name'
+      return false;
+    } else {
+      errorDiv.textContent = '';
+      return true;
+    }
+  }
+
+
+  function validatePincode() {
+            const pincode = document.getElementById('pincode').value;
+            const errorDiv = document.getElementById('pincode-error');
+            const pincodePattern = /^[0-9]{6}$/;
+            if (!pincodePattern.test(pincode)) {
+                errorDiv.textContent = 'Please enter a valid 6-digit pincode.';
+                return false;
+            } else {
+                errorDiv.textContent = '';
+                return true;
+            }
+        }
+  
+  function validateForm(){
+    const isUsernameValid = validateUsername();
+    const isMobileValid = validateMobile();
+    const isCountryValid = validateCountry();
+    const isStateValid = validateState();
+    const isCityValid = validateCity();
+    const isStreetValid = validateStreet();
+    const isPincodeValid = validatePincode();
+  
+
+    return isUsernameValid && isMobileValid && isCountryValid && isStateValid && isCityValid && isStreetValid && isPincodeValid;
+  }
+
+</script>
+
+</body>
+</html>
