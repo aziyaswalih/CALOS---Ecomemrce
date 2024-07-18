@@ -308,7 +308,7 @@
                                                 <article class="float-end">
                                                     <dl class="dlist">
                                                         <dt>Subtotal:</dt>
-                                                        <dd> ₹ <%= order.totalAmount %></dd>
+                                                        <dd> ₹ <%= parseFloat(order.totalAmount)  - 50 %></dd>
                                                     </dl>
                                                     <dl class="dlist">
                                                         <dt>Shipping cost:</dt>
@@ -316,7 +316,7 @@
                                                     </dl>
                                                     <dl class="dlist">
                                                         <dt>Grand total:</dt>
-                                                        <dd> <b class="h5"> ₹ <%= parseFloat(order.totalAmount)  + 50 %></b> </dd>
+                                                        <dd> <b class="h5"> ₹ <%= parseFloat(order.totalAmount)   %></b> </dd>
                                                     </dl>
                                                     <dl class="dlist">
                                                         <dt class="text-muted">Status:</dt>

@@ -7,6 +7,8 @@ const Cart = require('../models/cartModel')
 const Order = require('../models/orderModel')
 const Address = require('../models/addressModel')
 const Wishlist = require('../models/wishlistModel')
+const Offer = require('../models/offerModel')
+const Transaction = require('../models/transactionModel')
 const forgetPassword = require('../helpers/forgotPassword') 
 const crypto = require('crypto');
 const nodemailer = require('nodemailer');
@@ -154,6 +156,9 @@ var userData = req.session.user.name
   };
 
 
+  
+
+
 const loadLandingpage=async(req,res)=>{
     try {
 
@@ -226,7 +231,7 @@ const loadLandingpage=async(req,res)=>{
             sortCriteria = { arrivalDate: -1 };
     }
       const categories = await Category.find()
-      let product = await Product.find({is_delete:false,
+      let products = await Product.find({is_delete:false,
         $and: [
             { name: { $regex: search, $options: "i" } },
             { category: filter ? filter.toString() : { $exists: true } }
@@ -250,10 +255,35 @@ const loadLandingpage=async(req,res)=>{
         }else{
         user=null
         }
-        console.log(product,"========products load home=========");
+        console.log(products,"========products load home=========");
         // const product = await Product.find({})
+
+             // Apply offers
+             for (let product of products) {
+                let categoryOffer = await Offer.findOne({ category: product.category, isActive: true });
+                let productOffer = await Offer.findOne({ product: product._id, isActive: true });
+    
+                let productDiscountedPrice = product.promoPrice;
+                let categoryDiscountedPrice = product.promoPrice;
+    
+                if (productOffer) {
+                    productDiscountedPrice = product.promoPrice - (product.promoPrice * productOffer.Discount / 100);
+                }
+    
+                if (categoryOffer) {
+                    categoryDiscountedPrice = product.promoPrice - (product.promoPrice * categoryOffer.Discount / 100);
+                }
+    
+                // Check if any offer is applied
+                if (productOffer || categoryOffer) {
+                    product.discountedPrice = Math.min(productDiscountedPrice, categoryDiscountedPrice);
+                } else {
+                    product.discountedPrice = product.promoPrice; // No offer, show promo price
+                }
+            }
+
         res.status(200).render('home',{user:user,
-            products:product,
+            products:products,
             page,totalPages,
             sortOption,
             categories,
@@ -633,6 +663,16 @@ const loadProfile=async(req,res)=>{
         console.log("order data",orderData);
        const address = userData.map(user => user.address);
 
+
+    //    const transaction = await Transaction.findOne({userId:userId}).populate('productIdInOrder')
+    //    const transactionArray = Array.isArray(transaction) ? transaction : [];
+    //    console.log("transaction",transaction);
+    //    console.log("transaction",transactionArray);
+
+
+    //    ================================
+    
+    //    ================================
 
 
         res.render('profile',{user,address,orders:orderData})

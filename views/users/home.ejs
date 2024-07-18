@@ -903,13 +903,23 @@
                                 <h2><a href="/product/detail?id=<%= product._id %>"><%= product.name %></a></h2>
                                 <div class="rating-result" title="90%">
                                     <span>
-                                        <span>90%</span>
+                                        <span>70%</span>
                                     </span>
                                 </div>
+                                <!-- ================== -->
                                 <div class="product-price">
+                                    <span>₹<%= product.discountedPrice %></span>
+                                    <% if (product.discountedPrice < product.price) { %>
+                                    <span class="old-price">₹<%= product.price %></span>
+                                    <% } else { %>
+                                    <span>₹<%= product.promoPrice %></span>
+                                    <% } %>
+                                </div>
+                                 <!-- ================== -->
+                                <!-- <div class="product-price">
                                     <span>₹<%= product.promoPrice %> </span>
                                     <span class="old-price">₹<%= product.price %></span>
-                                </div>
+                                </div> -->
                                 <div class="product-action-1 show">
                                    <!-- Inside the loop -->
                                    <form id="myForm<%= product._id %>" class="product-form" method="post">
