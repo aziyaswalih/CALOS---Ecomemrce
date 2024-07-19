@@ -7,7 +7,7 @@ require('dotenv').config()
 const PORT = process.env.PORT || 3000
 
 const mongoose = require('mongoose')
-mongoose.connect(process.env.MONGODB)
+mongoose.connect("mongodb+srv://aziyasam:KZydJZcvewzxDBmB@cluster0.4vxau5f.mongodb.net/CALOS")
 .then(() => {
     console.log('connected to mongodb')
 })
