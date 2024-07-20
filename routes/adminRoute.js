@@ -43,8 +43,8 @@ adminRoute.get('/addproducts',adminAuth.isLogin,adminController.loadAddProducts)
 adminRoute.post('/addproducts',adminAuth.isLogin,multer,adminController.insertProduct)
 adminRoute.delete('/deleteproducts',adminAuth.isLogin,adminController.deleteProduct)
 adminRoute.get('/product/unblock',adminAuth.isLogin,adminController.addproduct)
-adminRoute.get('/editProduct',adminAuth.isLogin,adminController.editProduct)
-adminRoute.post('/editProduct',adminAuth.isLogin,multer,adminController.updateProduct)
+adminRoute.get('/editproduct',adminAuth.isLogin,adminController.editProduct)
+adminRoute.post('/editproduct',adminAuth.isLogin,multer,adminController.updateProduct)
 adminRoute.delete('/delete-image',adminAuth.isLogin,adminController.deleteimage)
 
 // routes for orders
