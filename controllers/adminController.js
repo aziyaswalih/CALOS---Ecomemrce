@@ -835,7 +835,7 @@ const editProduct = async(req,res) => {
         const productlist = await Product.findById(req.query.id)
         const category = await Category.find({})
 
-        res.render('editProduct',{products:productlist,categories:category,message:''})
+        res.render('editproduct',{products:productlist,categories:category,message:''})
     } catch (error) {
         console.error("error from edit product")
         res.status(500).json({ error: "Error editing product"});
@@ -893,12 +893,12 @@ const updateProduct=async(req,res)=>{
         if(productEdit)
         {
             console.log("product edited ");
-        res.render('editProduct',{products:productEdit,categories,message:'Updated successfully '})
+        res.render('editproduct',{products:productEdit,categories,message:'Updated successfully '})
 
             // res.redirect('/admin/products')
         }else
         {
-            res.render('editProduct',{message:'error from editing '})
+            res.render('editproduct',{message:'error from editing '})
             console.log('error from editproduct')
         }
         // res.json(categoryEdit)
