@@ -635,32 +635,7 @@ const loadOrderDetails = async (req, res) => {
 }
   
 const applyCoupon = async (req,res)=>{
-//   const { selectedCoupon, orderTotal } = req.body;
-// console.log(selectedCoupon,orderTotal,"body of apply coupon");
-//   try {
-//     const coupon = await Coupon.findOne({ code: selectedCoupon });
 
-//     if (!coupon || !coupon.isActive) {
-//       console.log("!coupon || !coupon.isActive");
-//       return res.status(400).json({ success: false, message: 'Invalid or inactive coupon' });
-//     }
-
-//     else if (coupon.minimumOrderAmount > orderTotal) {
-//       console.log("coupon.minimumOrderAmount > orderTotal");
-//       return res.status(400).json({ success: false, message: 'Minimum order amount not met' });
-//     }
-
-//     else if (coupon.endDate < Date.now()) {
-//       console.log("coupon.endDate < Date.now()");
-//       return res.status(400).json({ success: false, message: 'Coupon has expired' });
-//     }
-
-//     // Handle successful coupon application (update order, calculate discount, etc.)
-//     // ... your logic to apply coupon ...
-//  else{
-//   console.log("apply coupon successs ");
-//     res.status(200).json({ success: true });
-//  }
 try{
   const { couponCode } = req.body;
   const list = await Cart.findOne({userId:req.session.user._id}); // Example list object with total amount

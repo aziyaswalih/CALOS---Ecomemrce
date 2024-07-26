@@ -620,14 +620,22 @@ const  loadSuccessGoogle=async(req,res)=>{
             }
             else
     
-            {
+            { 
+                const userData = await User.findById(req.user._id)
                 req.session.user={
-                    _id:req.user._id
+                    _id: userData._id,
+                    email: userData.email,
+                    name: userData.name,
+                    is_block:userData.is_block
                 }
-                
+                if(userData.is_admin==0){
                 console.log("success",req.user._id);
                 // const message = Success: ${req.user.email};
                 res.status(200).redirect('/home')
+            }else{
+                res.redirect('/failure')
+
+            }
     
             }
         
